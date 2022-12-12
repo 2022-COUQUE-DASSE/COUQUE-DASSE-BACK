@@ -3,6 +3,7 @@ from flask import request
 from flask_cors import CORS # pip install flask-cors
 
 from camera import *
+from uart import *
 
 app = Flask(__name__,static_url_path='/static')
 CORS(
@@ -19,6 +20,12 @@ def hello():
 def take_picture():
     result = plant_picture()
     return result
+
+@app.route('/plant/led',methods=['GET'])
+def ledc_ontroll():
+    led_value = request.args.get('val','test')
+    print(led_value)
+    return led_value
 
 def main():
     app.debug = True
