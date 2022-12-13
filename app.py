@@ -23,8 +23,14 @@ def take_picture():
 
 @app.route('/plant/led',methods=['GET'])
 def ledc_ontroll():
+    is_led = ""
     led_value = request.args.get('val','test')
-    print(led_value)
+    if ( str(led_value) == 'true'):
+        is_led = "1"
+    elif ( str(led_value) == 'false'):
+        is_led = "0"
+    print(is_led)
+    send_string(is_led)
     return led_value
 
 def main():
